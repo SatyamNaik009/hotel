@@ -47,7 +47,7 @@ Step-by-Step Installation Guide:
 Backend Setup (Java with Spring Boot):
 
 Clone the Repository:
-Clone the repository from your version control system (e.g., GitLab, GitHub).
+Clone the repository from GitHub.
 
 Import Backend Project:
 Open your IDE and import the backend project as a Maven project.
@@ -86,6 +86,6 @@ Integrate Frontend with Backend:
 Update frontend API endpoints (axios calls) in React components to match backend URL (http://localhost:8080).
 
 Test Functionality:
-Test the complete functionality of EasyStay, including user registration, hotel search, room booking, and payment processing.
+Test the complete functionality , including user registration, hotel search, room booking, and payment processing.
 
 By following these steps, you should have set up and running on your local development environment.
