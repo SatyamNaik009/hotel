@@ -1,4 +1,5 @@
 (*Note: Configure Application Properties(secret key,access key and bucket-name) Navigate to:backend\src\main\resources\application.properties file)
+
 (Also Update the bucketName in backend\src\main\java\com\hotel\backend\service\AwsS3Service.java file)
 
 Project Title: E-Booking website
