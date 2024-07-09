@@ -5,6 +5,7 @@ import com.hotel.backend.entity.Booking;
 import com.hotel.backend.service.interf.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class BookingController {
     private BookingService bookingService;
 
     @PostMapping("/book-room/{roomId}/{userId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<Response> saveBookings(@PathVariable Long roomId,
                                                  @PathVariable Long userId,
                                                  @RequestBody Booking bookingRequest) {
@@ -26,6 +28,7 @@ public class BookingController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> getAllBookings() {
         Response response = bookingService.getAllBookings();
         return ResponseEntity.status(response.getStatusCode()).body(response);
@@ -38,6 +41,7 @@ public class BookingController {
     }
 
     @DeleteMapping("/cancel/{bookingId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<Response> cancelBooking(@PathVariable Long bookingId) {
         Response response = bookingService.cancelBooking(bookingId);
         return ResponseEntity.status(response.getStatusCode()).body(response);

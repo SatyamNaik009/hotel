@@ -7,8 +7,12 @@ import com.hotel.backend.entity.User;
 import com.hotel.backend.exception.OurException;
 import com.hotel.backend.repo.UserRepository;
 import com.hotel.backend.service.interf.UserService;
+import com.hotel.backend.utils.JWTUtils;
 import com.hotel.backend.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JWTUtils jwtUtils;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Override
     public Response register(User user) {
         Response response = new Response();
@@ -28,7 +38,7 @@ public class UserServiceImpl implements UserService {
             if (userRepository.existsByEmail(user.getEmail())) {
                 throw new OurException(user.getEmail() + "Already Exists");
             }
-            user.setPassword(user.getPassword());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             User savedUser = userRepository.save(user);
             UserDto userDTO = Utils.mapUserEntityToUserDTO(savedUser);
             response.setStatusCode(200);
@@ -50,8 +60,11 @@ public class UserServiceImpl implements UserService {
         Response response = new Response();
 
         try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
             var user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new OurException("user Not found"));
 
+            var token = jwtUtils.generateToken(user);
+            response.setToken(token);
             response.setStatusCode(200);
             response.setRole(user.getRole());
             response.setExpirationTime("7 Days");
