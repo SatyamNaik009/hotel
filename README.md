@@ -20,7 +20,7 @@ React Router: Enables client-side routing for a smooth, single-page application 
 Axios: Handles asynchronous HTTP requests to the backend API.
 
 Database:
-MySQLL: Relaional database management system for storing hotel information, user data, and booking details.
+MySQL: Relaional database management system for storing hotel information, user data, and booking details.
 Hibernate: ORM (Object-Relational Mapping) tool for mapping Java objects to database tables and vice versa.
 
 Other Technologies:
