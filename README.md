@@ -2,7 +2,7 @@
 
 (Also Update the bucketName in backend\src\main\java\com\hotel\backend\service\AwsS3Service.java file)
 
-Project Title: E-Booking website
+Project Title: E-Booking Hotel website
 
 Description:This project is a comprehensive web platform designed to simplify the process of booking hotel rooms. Leveraging Java with Spring Boot on the backend and React on the frontend, EasyStay offers a user-friendly interface where users can browse, search, and book hotel accommodations effortlessly. The platform integrates real-time room availability updates, and personalized user profiles to enhance the booking experience. With responsive design and intuitive navigation, it ensures a seamless booking journey for both guests and hotel managers alike.
 
