@@ -19,7 +19,7 @@ public class AwsS3Service {
 
 
 
-    private final String bucketName = "hotel--images";
+    private final String bucketName =;
 
     @Value("${aws.s3.access.key}")
     private String awsS3AccessKey;
